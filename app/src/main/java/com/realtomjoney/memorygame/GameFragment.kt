@@ -14,4 +14,10 @@ class GameFragment : Fragment() {
         val fragment = inflater.inflate(R.layout.fragment_game, container, false)
         return fragment
     }
+
+    companion object {
+        fun newInstance(): GameFragment {
+            return GameFragment()
+        }
+    }
 }
