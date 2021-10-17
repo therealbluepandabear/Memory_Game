@@ -11,7 +11,11 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragment = inflater.inflate(R.layout.fragment_game, container, false)
+        val fragment = inflater.inflate(
+            R.layout.fragment_game,
+            container,
+            false)
+
         return fragment
     }
 
