@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
+    <com.realtomjoney.memorygame.SquareFrameLayout
         android:id="@+id/gameLayout"
         android:layout_width="0dp"
         android:layout_height="354dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+    </com.realtomjoney.memorygame.SquareFrameLayout>
 
     <Button
         android:id="@+id/restartButton"
