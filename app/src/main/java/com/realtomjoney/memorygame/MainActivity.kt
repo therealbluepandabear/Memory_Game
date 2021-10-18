@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         setBindings()
 
         restartGame()
+
+        binding.restartButton.setOnClickListener {
+            restartGame()
+        }
     }
 
     private fun setBindings() {
