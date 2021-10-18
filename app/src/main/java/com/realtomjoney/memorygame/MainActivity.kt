@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     var thisIsSecondTap = false
@@ -47,6 +48,12 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
             thisIsSecondTap = true
         } else {
             tile2 = tile
+            thisIsSecondTap = false
+            compare()
         }
+    }
+
+    fun compare() {
+        Toast.makeText(this, "Let's compare", Toast.LENGTH_LONG).show()
     }
 }
