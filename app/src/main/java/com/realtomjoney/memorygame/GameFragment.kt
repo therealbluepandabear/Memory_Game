@@ -10,8 +10,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.realtomjoney.memorygame.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
+
+    private var _binding: FragmentGameBinding? = null
+
+    private val binding get() = _binding!!
+
     interface GameFragmentListener {
         fun makeTiles(): ArrayList<TextView>
     }
@@ -30,18 +36,19 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragment = inflater.inflate(
-            R.layout.fragment_game,
-            container,
-            false)
+        _binding = FragmentGameBinding.inflate(inflater, container, false)
 
         val context = activity as Context
-        val recyclerView: RecyclerView = fragment.findViewById(R.id.gameRecyclerView)
-        recyclerView.layoutManager = GridLayoutManager(context, 4)
+        binding.gameRecyclerView.layoutManager = GridLayoutManager(context, 4)
         val textViews = caller.makeTiles()
-        recyclerView.adapter = GameRecyclerAdapter(textViews)
+        binding.gameRecyclerView.adapter = GameRecyclerAdapter(textViews)
 
-        return fragment
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
