@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
 
     var gameIsActive = true
 
+    val foundTiles: ArrayList<Tile> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +75,13 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
 
             tile1.updateTile()
             tile2.updateTile()
+
+            foundTiles.add(tile1)
+            foundTiles.add(tile2)
+
+            if (foundTiles.size == 16) {
+                Toast.makeText(this, "You Won!", Toast.LENGTH_LONG).show()
+            }
         } else {
             tile1.tileStatus = Status.UNKNOWN
             tile2.tileStatus = Status.UNKNOWN
