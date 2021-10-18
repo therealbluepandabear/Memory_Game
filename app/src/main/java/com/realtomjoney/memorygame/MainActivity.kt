@@ -1,31 +1,41 @@
 package com.realtomjoney.memorygame
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.os.HandlerCompat.postDelayed
 
 class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
-    var thisIsSecondTap = false
-    lateinit var tile1: Tile
-    lateinit var tile2: Tile
+    private var thisIsSecondTap = false
+    private lateinit var tile1: Tile
+    private lateinit var tile2: Tile
 
-    var gameIsActive = true
+    private var gameIsActive = true
 
-    val foundTiles: ArrayList<Tile> = ArrayList()
+    private val foundTiles: ArrayList<Tile> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        restartGame()
+    }
+
+    private fun restartGame() {
+        val frag = supportFragmentManager.findFragmentByTag("game")
+
+        if (frag != null) {
+            supportFragmentManager
+                .beginTransaction()
+                .remove(frag).commit()
+        }
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.gameLayout, GameFragment.newInstance(),
-            "game").commit()
+            .add(
+                R.id.gameLayout, GameFragment.newInstance(),
+                "game"
+            ).commit()
     }
 
     override fun makeTiles(): ArrayList<Tile> {
@@ -68,7 +78,7 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         }
     }
 
-    fun compare() {
+    private fun compare() {
         if (tile1.value == tile2.value) {
             tile1.tileStatus = Status.FOUND
             tile2.tileStatus = Status.FOUND
