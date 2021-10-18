@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
 
     private fun restartGame() {
         gameIsActive = true
+        thisIsSecondTap = false
+        foundTiles.clear()
 
         val frag = supportFragmentManager.findFragmentByTag("game")
 
