@@ -3,10 +3,12 @@ package com.realtomjoney.memorygame
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,7 @@ class GameFragment : Fragment() {
     private val binding get() = _binding!!
 
     interface GameFragmentListener {
-        fun makeTiles(): ArrayList<TextView>
+        fun makeTiles(): ArrayList<Tile>
     }
 
     private lateinit var caller: GameFragmentListener
@@ -61,7 +63,7 @@ class RecyclerViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
     val tileParent: SquareFrameLayout = itemView.findViewById(R.id.tileParent)
 }
 
-class GameRecyclerAdapter(private val inputData: ArrayList<TextView>) : RecyclerView.Adapter<RecyclerViewHolder>() {
+class GameRecyclerAdapter(private val inputData: ArrayList<Tile>) : RecyclerView.Adapter<RecyclerViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -72,6 +74,14 @@ class GameRecyclerAdapter(private val inputData: ArrayList<TextView>) : Recycler
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val thisTile = inputData[position]
+
+        val params = FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT)
+        params.setMargins(5, 5, 5, 5)
+        thisTile.layoutParams = params
+        thisTile.gravity = Gravity.CENTER
+        thisTile.textSize = 24F
 
         holder.tileParent.addView(thisTile)
     }

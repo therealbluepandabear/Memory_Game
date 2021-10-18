@@ -16,11 +16,16 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
             "game").commit()
     }
 
-    override fun makeTiles(): ArrayList<TextView> {
-        val tilesArray: ArrayList<TextView> = ArrayList()
+    override fun makeTiles(): ArrayList<Tile> {
+        val tilesArray: ArrayList<Tile> = ArrayList()
         for (i in 1..16) {
-            val newTile = TextView(this)
-            newTile.text = "Hi"
+            var num = i
+            if (num > 8) {
+                num -= 8
+            }
+
+            val newTile = Tile(this, num)
+            newTile.text = num.toString()
             newTile.setTextColor(Color.BLACK)
             newTile.setBackgroundColor(Color.RED)
 
