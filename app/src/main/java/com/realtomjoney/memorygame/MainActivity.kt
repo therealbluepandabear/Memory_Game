@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     }
 
     private fun restartGame() {
+        gameIsActive = true
+
         val frag = supportFragmentManager.findFragmentByTag("game")
 
         if (frag != null) {
