@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
 
             tilesArray.add(newTile)
         }
+        tilesArray.shuffle()
         return tilesArray
     }
 }
