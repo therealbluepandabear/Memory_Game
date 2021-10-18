@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
+    var thisIsSecondTap = false
+    lateinit var tile1: Tile
+    lateinit var tile2: Tile
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,5 +41,12 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     override fun tileTapped(tile: Tile, index: Int) {
         tile.tileStatus = Status.FLIPPED
         tile.updateTile()
+
+        if (!thisIsSecondTap) {
+            tile1 = tile
+            thisIsSecondTap = true
+        } else {
+            tile2 = tile
+        }
     }
 }
