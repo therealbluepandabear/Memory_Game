@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import com.realtomjoney.memorygame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     private var thisIsSecondTap = false
@@ -15,11 +16,19 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
 
     private val foundTiles: ArrayList<Tile> = ArrayList()
 
+    private lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setBindings()
 
         restartGame()
+    }
+
+    private fun setBindings() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     private fun restartGame() {
