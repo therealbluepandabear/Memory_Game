@@ -13,7 +13,7 @@ data class Tile(var myContext: Context, var value: Int) : androidx.appcompat.wid
     }
 
     fun updateTile() {
-        this@Tile.text = value.toString()
+        this@Tile.text = "?"
         this@Tile.setBackgroundColor(Color.DKGRAY)
     }
 }
