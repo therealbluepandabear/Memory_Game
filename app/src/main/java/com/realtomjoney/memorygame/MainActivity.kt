@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     lateinit var tile1: Tile
     lateinit var tile2: Tile
 
+    var gameIsActive = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,6 +45,9 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     }
 
     override fun tileTapped(tile: Tile, index: Int) {
+        if (!gameIsActive || tile.tileStatus == Status.FOUND || tile.tileStatus == Status.FLIPPED)
+            return
+
         tile.tileStatus = Status.FLIPPED
         tile.updateTile()
 
@@ -52,6 +57,8 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         } else {
             tile2 = tile
             thisIsSecondTap = false
+
+            gameIsActive = false
 
             Handler(Looper.getMainLooper()).postDelayed({
                 compare()
@@ -73,5 +80,6 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
             tile1.updateTile()
             tile2.updateTile()
         }
+        gameIsActive = true
     }
 }
