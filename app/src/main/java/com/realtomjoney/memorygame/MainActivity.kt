@@ -26,13 +26,6 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
 
             val newTile = Tile(this, num)
 
-            if (num % 5 == 0) {
-                newTile.tileStatus = Status.FOUND
-            }
-            if (num % 7 == 0) {
-                newTile.tileStatus = Status.FLIPPED
-            }
-
             newTile.updateTile()
 
             tilesArray.add(newTile)
