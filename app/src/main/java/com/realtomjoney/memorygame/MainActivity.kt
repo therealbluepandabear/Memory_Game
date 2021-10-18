@@ -25,9 +25,7 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
             }
 
             val newTile = Tile(this, num)
-            newTile.text = num.toString()
-            newTile.setTextColor(Color.BLACK)
-            newTile.setBackgroundColor(Color.RED)
+            newTile.updateTile()
 
             tilesArray.add(newTile)
         }
