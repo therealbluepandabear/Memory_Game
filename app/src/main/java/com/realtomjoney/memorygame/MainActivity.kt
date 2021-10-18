@@ -33,4 +33,9 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         tilesArray.shuffle()
         return tilesArray
     }
+
+    override fun tileTapped(tile: Tile, index: Int) {
+        tile.tileStatus = Status.FLIPPED
+        tile.updateTile()
+    }
 }

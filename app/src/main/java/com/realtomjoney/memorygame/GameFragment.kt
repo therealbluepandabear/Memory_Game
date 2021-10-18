@@ -22,6 +22,7 @@ class GameFragment : Fragment() {
 
     interface GameFragmentListener {
         fun makeTiles(): ArrayList<Tile>
+        fun tileTapped(tile: Tile, index: Int)
     }
 
     private lateinit var caller: GameFragmentListener
@@ -43,7 +44,7 @@ class GameFragment : Fragment() {
         val context = activity as Context
         binding.gameRecyclerView.layoutManager = GridLayoutManager(context, 4)
         val textViews = caller.makeTiles()
-        binding.gameRecyclerView.adapter = GameRecyclerAdapter(textViews)
+        binding.gameRecyclerView.adapter = GameRecyclerAdapter(textViews, caller)
 
         return binding.root
     }
@@ -63,7 +64,9 @@ class RecyclerViewHolder(inflater: LayoutInflater, parent: ViewGroup) : Recycler
     val tileParent: SquareFrameLayout = itemView.findViewById(R.id.tileParent)
 }
 
-class GameRecyclerAdapter(private val inputData: ArrayList<Tile>) : RecyclerView.Adapter<RecyclerViewHolder>() {
+class GameRecyclerAdapter(private val inputData: ArrayList<Tile>,
+                          private val caller: GameFragment.GameFragmentListener)
+    : RecyclerView.Adapter<RecyclerViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -84,6 +87,10 @@ class GameRecyclerAdapter(private val inputData: ArrayList<Tile>) : RecyclerView
         thisTile.textSize = 24F
 
         holder.tileParent.addView(thisTile)
+
+        holder.tileParent.setOnClickListener {
+            caller.tileTapped(thisTile, position)
+        }
     }
 
     override fun getItemCount() = inputData.size;
