@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         for (i in 1..gridSize * gridSize) {
             var num = i
             if (num > gridSize * gridSize / 2) {
-                num -= gridSize * gridSize
+                num -= gridSize * gridSize / 2
             }
 
             val newTile = Tile(this, num)
