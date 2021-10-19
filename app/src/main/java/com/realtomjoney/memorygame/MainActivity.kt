@@ -7,7 +7,7 @@ import android.os.Looper
 import android.widget.Toast
 import com.realtomjoney.memorygame.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
+class MainActivity : AppCompatActivity(), GameFragmentListener {
     var gridSize = 4
     var thisIsSecondTap = false
     lateinit var tile1: Tile

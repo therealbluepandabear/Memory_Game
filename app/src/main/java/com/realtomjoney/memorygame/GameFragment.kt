@@ -15,17 +15,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.realtomjoney.memorygame.databinding.FragmentGameBinding
 
 class GameFragment(var gridSize: Int) : Fragment() {
-
     private var _binding: FragmentGameBinding? = null
 
     private val binding get() = _binding!!
 
-    interface GameFragmentListener {
-        fun makeTiles(): ArrayList<Tile>
-        fun tileTapped(tile: Tile)
-    }
-
     private lateinit var caller: GameFragmentListener
+
+    companion object {
+        fun newInstance(grid: Int): GameFragment {
+            return GameFragment(grid)
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,46 +53,4 @@ class GameFragment(var gridSize: Int) : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    companion object {
-        fun newInstance(grid: Int): GameFragment {
-            return GameFragment(grid)
-        }
-    }
-}
-class RecyclerViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(inflater.inflate(R.layout.card_layout, parent, false)) {
-    val tileParent: SquareFrameLayout = itemView.findViewById(R.id.tileParent)
-}
-
-class GameRecyclerAdapter(private val inputData: ArrayList<Tile>,
-                          private val caller: GameFragment.GameFragmentListener)
-    : RecyclerView.Adapter<RecyclerViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RecyclerViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return RecyclerViewHolder(inflater, parent)
-    }
-
-    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        val thisTile = inputData[position]
-
-        val params = FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT)
-        params.setMargins(5, 5, 5, 5)
-        thisTile.layoutParams = params
-        thisTile.gravity = Gravity.CENTER
-        thisTile.textSize = 24F
-
-        holder.tileParent.addView(thisTile)
-
-        holder.tileParent.setOnClickListener {
-            caller.tileTapped(thisTile)
-        }
-    }
-
-    override fun getItemCount() = inputData.size;
-
 }
