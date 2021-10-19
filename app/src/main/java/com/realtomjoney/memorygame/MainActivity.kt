@@ -37,26 +37,8 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         return extendedMakeTiles()
     }
 
-    override fun tileTapped(tile: Tile, index: Int) {
-        if (!gameIsActive || tile.tileStatus == Status.FOUND || tile.tileStatus == Status.FLIPPED)
-            return
-
-        tile.tileStatus = Status.FLIPPED
-        tile.updateTile()
-
-        if (!thisIsSecondTap) {
-            tile1 = tile
-            thisIsSecondTap = true
-        } else {
-            tile2 = tile
-            thisIsSecondTap = false
-
-            gameIsActive = false
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                compare()
-            }, 1000)
-        }
+    override fun tileTapped(tile: Tile) {
+        extendedTileTapped(tile)
     }
 
 

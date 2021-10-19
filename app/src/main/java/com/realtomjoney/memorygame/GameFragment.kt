@@ -22,7 +22,7 @@ class GameFragment(var gridSize: Int) : Fragment() {
 
     interface GameFragmentListener {
         fun makeTiles(): ArrayList<Tile>
-        fun tileTapped(tile: Tile, index: Int)
+        fun tileTapped(tile: Tile)
     }
 
     private lateinit var caller: GameFragmentListener
@@ -89,7 +89,7 @@ class GameRecyclerAdapter(private val inputData: ArrayList<Tile>,
         holder.tileParent.addView(thisTile)
 
         holder.tileParent.setOnClickListener {
-            caller.tileTapped(thisTile, position)
+            caller.tileTapped(thisTile)
         }
     }
 
