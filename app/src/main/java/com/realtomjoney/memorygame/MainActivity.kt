@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.realtomjoney.memorygame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
+    var gridSize = 4
+
     private var thisIsSecondTap = false
     private lateinit var tile1: Tile
     private lateinit var tile2: Tile
@@ -50,17 +52,17 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         supportFragmentManager
             .beginTransaction()
             .add(
-                R.id.gameLayout, GameFragment.newInstance(),
+                R.id.gameLayout, GameFragment.newInstance(gridSize),
                 "game"
             ).commit()
     }
 
     override fun makeTiles(): ArrayList<Tile> {
         val tilesArray: ArrayList<Tile> = ArrayList()
-        for (i in 1..16) {
+        for (i in 1..gridSize * gridSize) {
             var num = i
-            if (num > 8) {
-                num -= 8
+            if (num > gridSize * gridSize / 2) {
+                num -= gridSize * gridSize
             }
 
             val newTile = Tile(this, num)
@@ -106,7 +108,7 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
             foundTiles.add(tile1)
             foundTiles.add(tile2)
 
-            if (foundTiles.size == 16) {
+            if (foundTiles.size == gridSize * gridSize) {
                 Toast.makeText(this, "You Won!", Toast.LENGTH_LONG).show()
             }
         } else {

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.realtomjoney.memorygame.databinding.FragmentGameBinding
 
-class GameFragment : Fragment() {
+class GameFragment(var gridSize: Int) : Fragment() {
 
     private var _binding: FragmentGameBinding? = null
 
@@ -42,7 +42,7 @@ class GameFragment : Fragment() {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
 
         val context = activity as Context
-        binding.gameRecyclerView.layoutManager = GridLayoutManager(context, 4)
+        binding.gameRecyclerView.layoutManager = GridLayoutManager(context, gridSize)
         val textViews = caller.makeTiles()
         binding.gameRecyclerView.adapter = GameRecyclerAdapter(textViews, caller)
 
@@ -55,8 +55,8 @@ class GameFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): GameFragment {
-            return GameFragment()
+        fun newInstance(grid: Int): GameFragment {
+            return GameFragment(grid)
         }
     }
 }
