@@ -9,15 +9,11 @@ import com.realtomjoney.memorygame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     var gridSize = 4
-
     var thisIsSecondTap = false
     lateinit var tile1: Tile
     lateinit var tile2: Tile
-
     var gameIsActive = true
-
     val foundTiles: ArrayList<Tile> = ArrayList()
-
     lateinit var binding: ActivityMainBinding
 
 
@@ -35,26 +31,6 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     private fun setBindings() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-    }
-
-    private fun restartGame() {
-        gameIsActive = true
-        thisIsSecondTap = false
-        foundTiles.clear()
-
-        val frag = supportFragmentManager.findFragmentByTag("game")
-
-        if (frag != null) {
-            supportFragmentManager
-                .beginTransaction()
-                .remove(frag).commit()
-        }
-        supportFragmentManager
-            .beginTransaction()
-            .add(
-                R.id.gameLayout, GameFragment.newInstance(gridSize),
-                "game"
-            ).commit()
     }
 
     override fun makeTiles(): ArrayList<Tile> {
