@@ -10,15 +10,15 @@ import com.realtomjoney.memorygame.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
     var gridSize = 4
 
-    private var thisIsSecondTap = false
-    private lateinit var tile1: Tile
-    private lateinit var tile2: Tile
+    var thisIsSecondTap = false
+    lateinit var tile1: Tile
+    lateinit var tile2: Tile
 
-    private var gameIsActive = true
+    var gameIsActive = true
 
-    private val foundTiles: ArrayList<Tile> = ArrayList()
+    val foundTiles: ArrayList<Tile> = ArrayList()
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,27 +97,5 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         }
     }
 
-    private fun compare() {
-        if (tile1.value == tile2.value) {
-            tile1.tileStatus = Status.FOUND
-            tile2.tileStatus = Status.FOUND
 
-            tile1.updateTile()
-            tile2.updateTile()
-
-            foundTiles.add(tile1)
-            foundTiles.add(tile2)
-
-            if (foundTiles.size == gridSize * gridSize) {
-                Toast.makeText(this, "You Won!", Toast.LENGTH_LONG).show()
-            }
-        } else {
-            tile1.tileStatus = Status.UNKNOWN
-            tile2.tileStatus = Status.UNKNOWN
-
-            tile1.updateTile()
-            tile2.updateTile()
-        }
-        gameIsActive = true
-    }
 }
