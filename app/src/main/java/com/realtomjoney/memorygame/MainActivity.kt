@@ -33,24 +33,6 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         setContentView(binding.root)
     }
 
-    fun extendedMakeTiles(): ArrayList<Tile> {
-        val tilesArray: ArrayList<Tile> = ArrayList()
-        for (i in 1..gridSize * gridSize) {
-            var num = i
-            if (num > gridSize * gridSize / 2) {
-                num -= gridSize * gridSize / 2
-            }
-
-            val newTile = Tile(this, num)
-
-            newTile.updateTile()
-
-            tilesArray.add(newTile)
-        }
-        tilesArray.shuffle()
-        return tilesArray
-    }
-
     override fun makeTiles(): ArrayList<Tile> {
         return extendedMakeTiles()
     }
