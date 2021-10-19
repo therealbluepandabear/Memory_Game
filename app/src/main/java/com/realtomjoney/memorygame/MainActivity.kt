@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         setContentView(binding.root)
     }
 
-    override fun makeTiles(): ArrayList<Tile> {
+    fun extendedMakeTiles(): ArrayList<Tile> {
         val tilesArray: ArrayList<Tile> = ArrayList()
         for (i in 1..gridSize * gridSize) {
             var num = i
@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity(), GameFragment.GameFragmentListener {
         }
         tilesArray.shuffle()
         return tilesArray
+    }
+
+    override fun makeTiles(): ArrayList<Tile> {
+        return extendedMakeTiles()
     }
 
     override fun tileTapped(tile: Tile, index: Int) {
