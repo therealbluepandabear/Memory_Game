@@ -27,8 +27,8 @@ data class Tile(var myContext: Context, var value: Int) : androidx.appcompat.wid
         val objectAnimator1 = ObjectAnimator.ofFloat(this, "scaleX", 1f, 0f)
         val objectAnimator2 = ObjectAnimator.ofFloat(this, "scaleX", 0f, 1f)
 
-        objectAnimator1.duration = 250
-        objectAnimator2.duration = 250
+        objectAnimator1.duration = 100
+        objectAnimator2.duration = 100
 
         objectAnimator1.interpolator = DecelerateInterpolator()
         objectAnimator2.interpolator = AccelerateInterpolator()
